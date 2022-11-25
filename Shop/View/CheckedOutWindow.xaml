@@ -24,7 +24,7 @@
             Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"
             Text="{Binding Path=CheckedOutBalance, StringFormat='Your new balance is {0}', UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Grid.Row="1" Grid.Column="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Text="You have purchased"/>
-        <ListBox Background="SkyBlue" Grid.Row="1" Grid.Column="0" Margin="0,40,0,0" Name="PurchasedItems" ItemsSource="{Binding Path=Items}"/>
-        <Button Margin="0,50" Content="Back to menu" Command="{Binding Path=MenuCommand}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <ListBox Background="SkyBlue" Grid.Row="1" Grid.Column="0" Margin="0,40,0,0" Name="PurchasedItems" ItemsSource="{Binding Path=Item}"/>
+        <Button Margin="0,50" Content="Back to menu" Command="{Binding Path=OpenMainWindowCommand}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

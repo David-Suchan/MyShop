@@ -36,16 +36,9 @@
                    FontSize="30" 
                    FontFamily="Libre Bodoni"
         ></TextBlock>
-        <TextBlock 
-            Grid.ColumnSpan="3"                  
-            Grid.Row="1"
-            Grid.Column="1"
-            FontSize="30" 
-            Text="{Binding Path=Balance,  StringFormat='Your balance is {0}', UpdateSourceTrigger=PropertyChanged}"
-            VerticalAlignment="Center"
-            />
         <StackPanel Grid.Column="0" Grid.Row="1"  Margin="50" >
             <Button Height="40" Width="50" Content="Clothes" Command="{Binding Path=OpenClothesWindowCommand}"></Button>
+            <Button  Height="40" Width="50" Content="Account" Command="{Binding Path=OpenAccountInfoWindowCommand}"></Button>
         </StackPanel>
     </Grid>
 </Window>

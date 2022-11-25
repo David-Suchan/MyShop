@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Shop.DBHelp;
 using Shop.Model2;
 using Shop.Useful;
 
@@ -6,27 +7,26 @@ namespace Shop.ViewModel2
 {
     internal class MainViewModel : ViewModelBase
     {
-        static CheckedOutViewModel checkedOutViewModel = new CheckedOutViewModel();
+        //static CheckedOutViewModel checkedOutViewModel = new CheckedOutViewModel();
         public RelayCommand OpenClothesWindowCommand { get; set; }
         public User CurrentUser { get; set; } = new User();
 
+        public RelayCommand OpenAccountInfoWindowCommand { get; set; }
 
-        private decimal balance = checkedOutViewModel.CheckedOutBalance;
-
-        public decimal Balance
+        public void OpenAccountInfoWindowCommandExecute()
         {
-            get { return balance; }
-            set
-            {
-                balance = value;
-                OnPropertyChanged(nameof(Balance));
-            }
+            DBCommands.GetRecentlyPurchased(UserSupport.LoggedInUser.Id);
+            WindowManager.OpenAccountInfoWindow();
+            WindowManager.CloseMainWindow();
         }
+
+
+
 
         public MainViewModel()
         {
-
-            OpenClothesWindowCommand = new RelayCommand(OpenClothesWindowCommandExecute);
+            this.OpenAccountInfoWindowCommand = new RelayCommand(OpenAccountInfoWindowCommandExecute);
+            this.OpenClothesWindowCommand = new RelayCommand(OpenClothesWindowCommandExecute);
         }
 
         private void OpenClothesWindowCommandExecute()

@@ -2,9 +2,11 @@
 using Shop.Model2;
 using Shop.Useful;
 using Shop.View;
+using Shop.DBHelp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -39,21 +41,21 @@ namespace Shop.ViewModel2
             get { return @"C:\Users\DAVID\Desktop\Shop Photos\Slacks.jpg"; }
         }
 
-        private decimal davidBalance = David.Balance;
+        private decimal loggedInUserBalance = UserSupport.LoggedInUser.Balance;
 
-        public decimal DavidBalance
+        public decimal LoggedInUserBalance
         {
-            get { return davidBalance; }
+            get { return loggedInUserBalance; }
             set
             {
-                davidBalance = value;
-                OnPropertyChanged(nameof(DavidBalance));
+                loggedInUserBalance = value;
+                OnPropertyChanged(nameof(LoggedInUserBalance));
             }
         }
 
         private void BuyCommandExecute(decimal price)
         {
-            DavidBalance = DavidBalance - price;
+            UserSupport.LoggedInUser.Balance = UserSupport.LoggedInUser.Balance - price;
         }
         private void HomepageCommandExecute()
         {
@@ -64,10 +66,8 @@ namespace Shop.ViewModel2
         static public decimal TotalPrice { get; set; }
         private void CartCommandExecute()
         {
-
             WindowManager.OpenCartWindow();
             WindowManager.CloseClothesWindow();
-
         }
 
 
@@ -82,7 +82,7 @@ namespace Shop.ViewModel2
         private void AddCommandExecute(Item item)
         {
             CartViewModel cartViewModel = new CartViewModel();
-
+            DBCommands.AddToRecentlyPurchasedTable(UserSupport.LoggedInUser.Id, item);
             Cart.Add(item);
             TotalPrice += item.Price;
 
@@ -94,12 +94,7 @@ namespace Shop.ViewModel2
             BuyCommand = new RelayCommand<decimal>(BuyCommandExecute);
             HomepageCommand = new RelayCommand(HomepageCommandExecute);
             AddCommand = new RelayCommand<Item>(AddCommandExecute);
-            Skirt.Price = 29.99m;
-            Skirt.Name = "Skirt";
-            Slacks.Price = 49.99m;
-            Slacks.Name = "Slacks";
-            GreenTshirt.Price = 34.99m;
-            GreenTshirt.Name = "Green t-shirt";
+            
         }
 
     }

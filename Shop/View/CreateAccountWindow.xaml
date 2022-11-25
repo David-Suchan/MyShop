@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CreateAccountWindow" Height="450" Width="800">
     <Window.DataContext>
-        <local:CreateAccountViewModel/>
+        <local:UserSupport/>
     </Window.DataContext>
     
     <Grid>

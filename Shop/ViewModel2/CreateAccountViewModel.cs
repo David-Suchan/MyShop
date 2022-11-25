@@ -8,29 +8,14 @@ using Shop.DBHelp;
 using Shop.View;
 using System.Windows.Controls;
 using Shop.Useful;
+using Shop.Model2;
+using System.Windows;
 
 namespace Shop.ViewModel2
 {
-    internal class CreateAccountViewModel
+    public class CreateAccountViewModel
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
 
-        public RelayCommand CreateUserCommand { get; set; }
-
-        public void CreateUserCommandExecute()
-        {
-            CreateAccountWindow createAccountWindow = new CreateAccountWindow();
-            
-            DBCommands.AddToDatabase(Username, Password);
-            WindowManager.OpenMainWindow();
-            WindowManager.CloseCreateAccountWindow();
-
-        }
-
-        public CreateAccountViewModel()
-        {
-            this.CreateUserCommand = new RelayCommand(CreateUserCommandExecute);
-        }
     }
+    
 }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Shop.DBHelp;
 using Shop.Model2;
 using Shop.Useful;
 using Shop.View;
@@ -18,11 +19,8 @@ namespace Shop.ViewModel2
     internal class CartViewModel : ViewModelBase
     {
 
-        static CartWindow cartWindow = new CartWindow();
-        private ObservableCollection<Item> items = ClothesViewModel.Cart;
-        static CheckedOutWindow checkOutWindow = new CheckedOutWindow();
-
-
+        
+        private ObservableCollection<Item> items = ClothesViewModel.Cart;        
         public ObservableCollection<Item> Items
         {
             get { return items; }
@@ -35,13 +33,7 @@ namespace Shop.ViewModel2
 
         static ClothesViewModel clothesViewModel = new ClothesViewModel();
 
-
-
-
-
         public decimal price { get; set; } = ClothesViewModel.TotalPrice;
-
-
 
         public RelayCommand RemoveCommand { get; set; }
 
@@ -60,32 +52,33 @@ namespace Shop.ViewModel2
 
         public RelayCommand CheckedOutWindowCommand { get; set; }
 
-        public static decimal FinalBalance { get; set; } = clothesViewModel.DavidBalance;
+        public static decimal FinalBalance { get; set; } = UserSupport.LoggedInUser.Balance;
 
         public void RemoveCommandExecute()
         {
-
-
-
             cartWindow.TotalPrice.Text = Convert.ToString(Convert.ToDecimal(cartWindow.TotalPrice.Text) - ClothesViewModel.Cart[cartWindow.cart.SelectedIndex + 1].Price);
             Price -= ClothesViewModel.Cart[cartWindow.cart.SelectedIndex + 1].Price;
             AfterCheckout += ClothesViewModel.Cart[cartWindow.cart.SelectedIndex + 1].Price;
             ClothesViewModel.Cart.RemoveAt(cartWindow.cart.SelectedIndex + 1);
-
-
-
-
         }
+
+
 
 
         public void CheckedOutWindowCommandExecute()
         {
             FinalBalance -= Price;
+            DBCommands.UpdateBalance(UserSupport.LoggedInUser.Id, FinalBalance);
+            foreach (var item in Items)
+            {
+                DBCommands.AddToRecentlyPurchasedTable(UserSupport.LoggedInUser.Id, item);
+            }
             WindowManager.OpenCheckedOutWindow();
+            Messenger.SendMessage(typeof(ObservableCollection<Item>), this.Items);
             WindowManager.CloseCartWindow();
         }
 
-        private decimal afterCheckout = ClothesViewModel.David.Balance - ClothesViewModel.TotalPrice;
+        private decimal afterCheckout = FinalBalance - ClothesViewModel.TotalPrice;
 
         public decimal AfterCheckout
         {

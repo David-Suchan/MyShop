@@ -1,6 +1,5 @@
-﻿
+﻿using Shop.Useful;
 using System;
-using DBHelp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +12,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.IO;
-using Shop.Useful;
-using Shop.DBHelp;
 
 namespace Shop.View
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for AccountInfoWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class AccountInfoWindow : Window
     {
-        public LoginWindow()
+        public AccountInfoWindow()
         {
-            DBInfo dBInfo = new DBInfo();
-            WindowManager.loginWindow = this;
+            WindowManager.accountInfoWindow = this;
             InitializeComponent();
         }
     }

@@ -3,6 +3,9 @@
   <PropertyGroup />
   <ItemGroup />
   <ItemGroup>
+    <Compile Update="View\AccountInfoWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CartWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -20,6 +23,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\AccountInfoWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\CartWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

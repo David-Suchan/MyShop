@@ -15,6 +15,7 @@ namespace Shop.Useful
         public static CheckedOutWindow checkedOutWindow;
         public static CreateAccountWindow createAccountWindow;
         public static LoginWindow loginWindow;
+        public static AccountInfoWindow accountInfoWindow;
         public static void OpenMainWindow()
         {
             mainWindow = new MainWindow();
@@ -93,6 +94,19 @@ namespace Shop.Useful
                 loginWindow.Close();
             }
             loginWindow = null;
+        }
+        public static void OpenAccountInfoWindow()
+        {
+            accountInfoWindow = new AccountInfoWindow();
+            accountInfoWindow.Show();
+        }
+        public static void CloseAccountInfoWindow()
+        {
+            if(accountInfoWindow != null)
+            {
+                accountInfoWindow.Close();
+            }
+            accountInfoWindow = null;
         }
     }
 }

@@ -22,15 +22,16 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1">
             <TextBlock Name="Username"  FontSize="20" Text="Username"/>
-            <TextBox Margin="0,15"/>
+            <TextBox Text="{Binding Path=Username}" Margin="0,15"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <TextBlock  FontSize="20" Text="Password"/>
-            <PasswordBox Name="Password" Margin="0,15"/>
+            <TextBox Text="{Binding Path=Password}"  Margin="0,15"/>
         </StackPanel>
         <TextBlock Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" FontSize="30" Margin="0,25"
                    Text="Welcome to David's shop &#x0a; Please log in.&#x0a;If you do not have an account &#x0a;you can create one"/>
         <Button Content="Create account" Grid.Column="1" Grid.Row="3" Command="{Binding Path=OpenCreateWindowCommand}"/>
+        <Button Content="Login" Grid.Column="0" Grid.Row="3" Command="{Binding Path=LoginCommand}"/>
 
 
     </Grid>
